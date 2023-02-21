@@ -1,18 +1,25 @@
+Logging in to the cluster
+cpd-cli manage login-to-ocp \
+--token=${OCP_TOKEN} \
+--server=${OCP_URL}
 
-
+Installing the operator
 cpd-cli manage apply-olm \
 --release=${VERSION} \
 --cpd_operator_ns=${PROJECT_CPD_OPS} \
 --components=$COMPONENTS
 
+Installing the service
 cpd-cli manage apply-cr \
 --components=match360 \
---release=${VERSION} \
+--release=$COMPONENTS \
 --cpd_instance_ns=${PROJECT_CPD_INSTANCE} \
 --block_storage_class=${STG_CLASS_BLOCK} \
 --file_storage_class=${STG_CLASS_FILE} \
+--param-file=/tmp/work/install-options.yml \
 --license_acceptance=true
 
+Validating the installation
 cpd-cli manage get-cr-status \
 --cpd_instance_ns=${PROJECT_CPD_INSTANCE} \
---components=match360
+--components=$COMPONENTS
