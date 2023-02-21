@@ -1,0 +1,3 @@
+match360_scale_config: medium
+match360_onboard_timeout: 500
+match360_ccs_http_timeout: 2500
