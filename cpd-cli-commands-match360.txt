@@ -1,0 +1,18 @@
+
+
+cpd-cli manage apply-olm \
+--release=${VERSION} \
+--cpd_operator_ns=${PROJECT_CPD_OPS} \
+--components=$COMPONENTS
+
+cpd-cli manage apply-cr \
+--components=match360 \
+--release=${VERSION} \
+--cpd_instance_ns=${PROJECT_CPD_INSTANCE} \
+--block_storage_class=${STG_CLASS_BLOCK} \
+--file_storage_class=${STG_CLASS_FILE} \
+--license_acceptance=true
+
+cpd-cli manage get-cr-status \
+--cpd_instance_ns=${PROJECT_CPD_INSTANCE} \
+--components=match360
